@@ -1,0 +1,127 @@
+---
+title: "E-Factura PFA 2026 — Ghid Complet de Implementare Pas cu Pas"
+description: "E-Factura PFA 2026: cine e obligat, cum emiți în SPV ANAF, software recomandat, termene și sancțiunea de 15%. Ghid complet pentru freelanceri."
+pubDate: 2026-01-05
+group: "tehnic"
+keywords: ["e-factura pfa 2026", "efactura pfa", "ro e-factura pfa", "factura electronica pfa 2026"]
+relatedPosts: ["cod-caen-pfa-2026", "contabilitate-pfa-online-2026", "calculator-taxe-pfa-2026"]
+featured: false
+---
+
+Sistemul **RO e-Factura** este obligatoriu pentru toate tranzacțiile B2B în România din 2024. În 2026, sistemul este complet implementat și nerespectarea lui atrage **sancțiuni de 15% din valoarea facturii**.
+
+## Cine are obligația de e-Factura în 2026?
+
+| Tip tranzacție | Obligație e-Factura |
+|---|---|
+| **PFA → Firmă sau alt PFA** (B2B) | **Obligatorie** |
+| **PFA → Persoană fizică** (B2C), plătitor TVA | Obligatorie |
+| **PFA → Persoană fizică** (B2C), fără TVA | Opțională (recomandată) |
+| **PFA → Instituție publică** (B2G) | **Obligatorie** |
+
+> **Concluzie practică:** Dacă emiți orice factură către o firmă sau altă entitate juridică, trebuie să folosești e-Factura.
+
+## Cum emiti e-Factura ca PFA în 2026 — 3 metode
+
+### Metoda 1: Direct în SPV ANAF (gratuită)
+1. Accesează [anaf.ro](https://www.anaf.ro) → Spațiul Privat Virtual
+2. Autentifică-te cu certificat digital sau user/parolă
+3. Selectează **RO e-Factura** → Emitere factură
+4. Completează manual câmpurile (CIF client, servicii, sume)
+5. Sistemul generează XML UBL și îl transmite automat
+6. Clientul primește factura în propriul SPV
+
+**Avantaj:** Gratuit  
+**Dezavantaj:** Manual, durează, nu se integrează cu contabilitatea
+
+### Metoda 2: Software cu integrare API (recomandată)
+Soluții populare cu e-Factura integrată:
+- **SmartBill** — cel mai popular, 30–60 RON/lună
+- **Oblio** — interfață simplă, 20–40 RON/lună
+- **Contapp** — pentru PFA mic, 25–45 RON/lună
+- **Saga** — complex, pentru volum mare
+
+Funcționare: emiți factura normal în software → se trimite automat în SPV ANAF → clientul primește în SPV-ul lui.
+
+**Avantaj:** Automatizat, integrat cu contabilitatea  
+**Dezavantaj:** Cost lunar ~30–60 RON
+
+### Metoda 3: Export XML din Excel cu upload manual
+Există template-uri Excel care generează XML UBL conform. Îl uploadezi manual în SPV.
+
+**Avantaj:** Gratuit, flexibil  
+**Dezavantaj:** Risc de erori, laborios, nu scalabil
+
+## Ce trebuie să conțină o e-Factura validă?
+
+Câmpurile obligatorii conform standardului UBL 2.1 și cerințelor ANAF:
+
+| Câmp | Detalii |
+|---|---|
+| CIF emitent | CIF-ul tău de PFA |
+| CIF beneficiar | CIF-ul clientului |
+| Număr și dată factură | Conform seriei de numerotare |
+| Descriere servicii/bunuri | Clară și completă |
+| Cantitate și preț unitar | Valorile nete |
+| TVA (dacă aplicabil) | Cota și suma TVA |
+| Total de plată | Suma finală |
+| Termenul de plată | Obligatoriu |
+| Cont bancar emitent | IBAN pentru plată |
+
+## Termene și sancțiuni 2026
+
+| Situație | Sancțiune |
+|---|---|
+| Factură B2B neemisă prin e-Factura | **15% din valoarea facturii** |
+| Factură transmisă cu întârziere (> 5 zile lucrătoare) | Amendă **5.000–10.000 RON** |
+| Factură cu date incomplete/eronate | Corectare obligatorie + posibilă amendă |
+
+> **Termenul de transmitere:** e-Factura trebuie transmisă în SPV în **5 zile lucrătoare** de la data emiterii facturii.
+
+## Cum primești facturile de la furnizori?
+
+Ca PFA, poți primi și tu facturi prin e-Factura:
+1. Activează funcția de **primire facturi** în SPV
+2. Furnizorii tăi (dacă sunt în sistem) trimit XML direct în SPV-ul tău
+3. Descărcezi și înregistrezi în contabilitate
+
+Dacă furnizorul nu e în sistemul RO e-Factura, îți trimite factura tradițional (PDF, hârtie).
+
+## Facturare internațională — e-Factura se aplică?
+
+| Tip client | e-Factura |
+|---|---|
+| Client din România (firmă) | **Obligatorie** |
+| Client din UE (firmă) | **Nu** — facturezi normal cu mențiunea "TVA 0%" |
+| Client non-UE | **Nu** — factură normală export |
+
+Facturile internaționale nu trec prin sistemul RO e-Factura, dar trebuie să respecți cerințele legale proprii (mențiuni TVA, cod VIES dacă UE B2B, etc.).
+
+## Corectarea erorilor pe e-Factura
+
+Dacă ai emis o factură greșită prin e-Factura:
+1. **Nu poți modifica** o factură transmisă
+2. Emiți o **factură de stornare** (credit note) pentru valoarea incorecta
+3. Emiți o nouă factură corectă
+4. Ambele (stornarea + noua factură) trebuie transmise prin e-Factura
+
+## Întrebări frecvente e-Factura PFA
+
+### Dacă clientul meu e persoană fizică, trebuie să emit e-Factura?
+Dacă ești **plătitor de TVA**: da, obligatoriu. Dacă nu ești plătitor de TVA și clientul e persoana fizica: nu e obligatoriu, dar e recomandat pentru evidența ta.
+
+### Pot emite e-Factura fără semnătură electronică?
+Da. SPV-ul ANAF acceptă autentificarea cu user/parolă (fără semnătură electronică) pentru emiterea e-Facturilor. Semnătura electronică e necesară pentru alte tipuri de declarații.
+
+### Cum știu că e-Factura a ajuns la client?
+SPV-ul ANAF îți confirmă cu numărul de înregistrare al transmisiei. Dacă clientul a activat primirea, o vede imediat în SPV-ul lui.
+
+### E-Factura înlocuiește factura PDF trimisă pe email?
+Da, în relațiile B2B. Poți trimite și PDF-ul ca referință, dar documentul fiscal oficial este cel din SPV ANAF. Clientul nu poate deduce TVA sau înregistra cheltuiala pe baza unui PDF dacă nu e în e-Factura.
+
+### Ce fac dacă software-ul meu de facturare nu are e-Factura?
+Schimbă software-ul (toți furnizorii majori au implementat e-Factura) sau folosește SPV-ul ANAF direct. Din 2024, lipsa e-Facturai costă 15% din factură — merită să investești 30–50 RON/lună în software.
+
+Detalii contabilitate: [Contabilitate PFA Online 2026](/blog/tehnic/contabilitate-pfa-online-2026/) | [Declarația Unică 2026](/blog/compliance/declaratia-unica-2026/)
+
+[Calculează taxele anuale PFA →](/calculator/)

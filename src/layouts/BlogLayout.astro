@@ -1,0 +1,117 @@
+---
+import Layout from './Layout.astro';
+import AdSenseAd from '../components/AdSenseAd.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  pubDate: Date;
+  updatedDate?: Date;
+  group: string;
+  keywords: string[];
+  relatedPosts: string[];
+  slug: string;
+}
+
+const { title, description, pubDate, updatedDate, group, keywords, relatedPosts, slug } = Astro.props;
+
+const groupLabels: Record<string, string> = {
+  calculator: 'Calculator',
+  compliance: 'Taxe & Declarații',
+  ghiduri: 'Ghiduri Practice',
+  tehnic: 'Tehnic & Ügyvitel',
+};
+
+const groupUrls: Record<string, string> = {
+  calculator: '/calculator/',
+  compliance: '/blog/compliance/',
+  ghiduri: '/blog/ghiduri/',
+  tehnic: '/blog/tehnic/',
+};
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description: description,
+  datePublished: pubDate.toISOString(),
+  dateModified: (updatedDate || pubDate).toISOString(),
+  author: { '@type': 'Organization', name: 'CalculatorTaxePFA.ro' },
+  publisher: {
+    '@type': 'Organization',
+    name: 'CalculatorTaxePFA.ro',
+    url: 'https://calculatortaxepfa.ro',
+  },
+  inLanguage: 'ro',
+  keywords: keywords.join(', '),
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Acasă', item: 'https://calculatortaxepfa.ro/' },
+    { '@type': 'ListItem', position: 2, name: groupLabels[group], item: `https://calculatortaxepfa.ro${groupUrls[group]}` },
+    { '@type': 'ListItem', position: 3, name: title },
+  ],
+};
+---
+<Layout title={title} description={description} schema={articleSchema}>
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} slot="schema" />
+
+  <div class="container" style="padding-top:2rem;padding-bottom:4rem;max-width:800px">
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Acasă</a>
+      <span>›</span>
+      <a href={groupUrls[group]}>{groupLabels[group]}</a>
+      <span>›</span>
+      <span>{title}</span>
+    </nav>
+
+    <article>
+      <header style="margin-bottom:2rem">
+        <span class="badge badge-blue">{groupLabels[group]}</span>
+        <h1 style="margin-top:.75rem">{title}</h1>
+        <p class="text-muted" style="margin-top:.5rem;font-size:.875rem">
+          Publicat: {pubDate.toLocaleDateString('ro-RO', { year:'numeric', month:'long', day:'numeric' })}
+          {updatedDate && ` · Actualizat: ${updatedDate.toLocaleDateString('ro-RO', { year:'numeric', month:'long', day:'numeric' })}`}
+        </p>
+      </header>
+
+      <!-- Ad: deasupra conținutului -->
+      <AdSenseAd format="horizontal" slot="top-article" />
+
+      <div class="article-content">
+        <slot />
+      </div>
+
+      <!-- Ad: sub conținut -->
+      <AdSenseAd format="inline" slot="bottom-article" />
+    </article>
+
+    <!-- CTA Calculator -->
+    <div class="card text-center" style="margin-top:3rem;background:#e8effd;border-color:#1a56db">
+      <h3 style="color:#1a56db;margin:0 0 .5rem">Calculează taxele tale PFA acum</h3>
+      <p style="margin:0 0 1rem;color:#6b7280">Calculator gratuit, actualizat pentru 2026</p>
+      <a href="/calculator/" class="btn">→ Calculator Taxe PFA 2026</a>
+    </div>
+
+    <!-- Related posts -->
+    {relatedPosts.length > 0 && (
+      <section style="margin-top:3rem">
+        <h2 style="font-size:1.25rem">Articole similare</h2>
+        <ul>
+          {relatedPosts.map(p => <li><a href={`/blog/${p}/`}>{p.replace(/-/g,' ')}</a></li>)}
+        </ul>
+      </section>
+    )}
+  </div>
+</Layout>
+
+<style>
+  .article-content :global(h2) { border-top: 2px solid var(--border); padding-top: 1.5rem; }
+  .article-content :global(table) { margin: 1.5rem 0; }
+  .article-content :global(.table-wrap) { margin: 1.5rem 0; }
+  .article-content :global(blockquote) { border-left: 4px solid var(--blue); padding: 1rem 1.5rem; background: var(--blue-light); border-radius: 0 var(--radius) var(--radius) 0; margin: 1.5rem 0; }
+</style>

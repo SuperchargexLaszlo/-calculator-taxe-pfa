@@ -1,0 +1,111 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import CalculatorPFA from '../../components/CalculatorPFA.tsx';
+import AdSenseAd from '../../components/AdSenseAd.astro';
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  name: 'Calculator Taxe PFA 2026',
+  url: 'https://calculatortaxepfa.ro/calculator/',
+  description: 'Calculator gratuit CAS, CASS și impozit pe venit pentru PFA în România 2026',
+  applicationCategory: 'FinanceApplication',
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'RON' },
+  inLanguage: 'ro',
+};
+
+const faq = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'Cum se calculează CAS pentru PFA în 2026?',
+      acceptedAnswer: { '@type': 'Answer', text: 'CAS se calculează ca 25% din venitul net impozabil, dar numai dacă venitul net depășește 6 salarii minime (24.300 RON în 2026). Baza maximă de calcul este 24 salarii minime (97.200 RON).' }
+    },
+    {
+      '@type': 'Question',
+      name: 'Cât este CASS pentru PFA în 2026?',
+      acceptedAnswer: { '@type': 'Answer', text: 'CASS este 10% din venit, cu o bază minimă de 6 salarii minime (24.300 RON) și maximă de 60 salarii minime (243.000 RON). Suma minimă anuală este de 2.430 RON.' }
+    },
+    {
+      '@type': 'Question',
+      name: 'Un pensionar cu PFA plătește CAS în 2026?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Nu. Pensionarii cu PFA sunt scutiți de plata CAS (contribuția la pensie), dar plătesc în continuare CASS și impozit pe venit.' }
+    },
+    {
+      '@type': 'Question',
+      name: 'Care este diferența dintre sistem real și normă de venit?',
+      acceptedAnswer: { '@type': 'Answer', text: 'La sistemul real, taxele se calculează pe venitul efectiv (venituri minus cheltuieli deductibile). La norma de venit, se folosește o sumă fixă stabilită de ANAF pe județ și activitate, indiferent de venitul real.' }
+    },
+  ]
+};
+---
+<Layout
+  title="Calculator Taxe PFA 2026 — CAS, CASS și Impozit pe Venit"
+  description="Calculator complet taxe PFA 2026. Calculează CAS (25%), CASS (10%) și impozit (10%) în funcție de venit, sistem de impozitare și statut pensionar. Salariu minim 4.050 RON."
+  schema={schema}
+>
+  <script type="application/ld+json" set:html={JSON.stringify(faq)} slot="schema" />
+
+  <div class="container" style="padding-top:2rem;padding-bottom:4rem">
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb">
+      <a href="/">Acasă</a><span>›</span><span>Calculator Taxe PFA 2026</span>
+    </nav>
+
+    <h1>Calculator Taxe PFA 2026</h1>
+    <p style="font-size:1.1rem;color:#6b7280;margin-bottom:2rem;max-width:640px">
+      Calculează exact cât CAS, CASS și impozit pe venit plătești ca PFA în 2026. Actualizat cu salariul minim de <strong>4.050 RON</strong>.
+    </p>
+
+    <AdSenseAd format="horizontal" />
+
+    <div class="card" style="margin-top:1.5rem">
+      <CalculatorPFA client:load />
+    </div>
+
+    <AdSenseAd format="inline" />
+
+    <!-- Explicații -->
+    <section style="margin-top:3rem">
+      <h2>Cum funcționează calculatorul taxe PFA 2026?</h2>
+      <p>Calculatorul folosește formulele oficiale ANAF și datele fiscale valabile în 2026, cu salariul minim brut de <strong>4.050 RON</strong>.</p>
+
+      <h3>Formula CAS (Pensie) 2026</h3>
+      <ul>
+        <li>Dacă venit net <strong>sub 24.300 RON</strong> (6 salarii): nu plătești CAS</li>
+        <li>Dacă venit net <strong>24.300 – 97.200 RON</strong>: CAS = venit net × 25%</li>
+        <li>Dacă venit net <strong>peste 97.200 RON</strong>: CAS fix = 97.200 × 25% = 24.300 RON/an</li>
+        <li>Pensionarii: <strong>scutiți de CAS</strong></li>
+      </ul>
+
+      <h3>Formula CASS (Sănătate) 2026</h3>
+      <ul>
+        <li>Sub 24.300 RON: CASS fix = 24.300 × 10% = <strong>2.430 RON/an</strong></li>
+        <li>24.300 – 243.000 RON: CASS = venit net × 10%</li>
+        <li>Peste 243.000 RON: CASS fix = 243.000 × 10% = <strong>24.300 RON/an</strong></li>
+      </ul>
+
+      <h3>Impozit pe venit</h3>
+      <p>10% din baza de impozitare (venit net – CAS – CASS).</p>
+    </section>
+
+    <!-- FAQ vizual -->
+    <section style="margin-top:3rem">
+      <h2>Întrebări frecvente</h2>
+      <div style="display:flex;flex-direction:column;gap:1rem">
+        {faq.mainEntity.map((item: any) => (
+          <div class="card">
+            <strong>{item.name}</strong>
+            <p style="margin:0.5rem 0 0;color:#6b7280;font-size:.9rem">{item.acceptedAnswer.text}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <div style="margin-top:2rem;text-align:center">
+      <a href="/calculator/pfa-vs-srl/" class="btn btn-outline">⚖️ Compară PFA vs SRL 2026 →</a>
+    </div>
+  </div>
+</Layout>

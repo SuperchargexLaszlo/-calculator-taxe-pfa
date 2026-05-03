@@ -1,0 +1,15 @@
+---
+interface Props {
+  format?: 'horizontal' | 'inline' | 'sidebar';
+  slot?: string;
+}
+const { format = 'horizontal' } = Astro.props;
+const cls = format === 'horizontal' ? 'ad-unit ad-unit-horizontal' : 'ad-unit ad-unit-inline';
+const label = format === 'horizontal' ? 'Publicitate 728×90' : 'Publicitate 300×250';
+---
+<!-- AdSense unit — înlocuiește cu codul real după aprobare -->
+<div class={cls}>{label}</div>
+<!-- PRODUCTION: dezcommentează și adaugă data-ad-client + data-ad-slot:
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXX" data-ad-slot="XXXX" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+-->

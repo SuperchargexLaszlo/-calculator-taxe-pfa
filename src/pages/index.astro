@@ -1,0 +1,133 @@
+---
+import Layout from '../layouts/Layout.astro';
+import CalculatorPFA from '../components/CalculatorPFA.tsx';
+import AdSenseAd from '../components/AdSenseAd.astro';
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('blog');
+const featuredPosts = allPosts
+  .filter(p => p.data.featured)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 6);
+
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'CalculatorTaxePFA.ro',
+  url: 'https://calculatortaxepfa.ro',
+  description: 'Calculator gratuit pentru taxele PFA și SRL în România 2026',
+  inLanguage: 'ro',
+};
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'Ce taxe plătește un PFA în 2026?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Un PFA plătește CAS (pensie) 25%, CASS (sănătate) 10% și impozit pe venit 10%. Baza de calcul depinde de venitul net și de plafoanele de 6, 12 și 24 salarii minime (salariul minim 2026: 4.050 RON).',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Care este salariul minim în 2026?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Salariul minim brut garantat în plată în 2026 este de 4.050 RON. Acesta este baza de calcul pentru plafoanele CAS și CASS la PFA.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Ce este plafon 6 salarii minime pentru PFA?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Plafonul de 6 salarii minime în 2026 este de 24.300 RON. Un PFA cu venit net sub acest plafon nu datorează CAS, dar plătește CASS fix calculat la 6 salarii minime.',
+      },
+    },
+  ],
+};
+---
+<Layout
+  title="Calculator Taxe PFA 2026 — Calculează Gratuit Online"
+  description="Calculator gratuit pentru taxele PFA 2026: CAS, CASS și impozit pe venit. Actualizat cu salariul minim 4.050 RON și plafoanele 2026. Calculează în 30 de secunde."
+>
+  <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} slot="schema" />
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} slot="schema" />
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <h1>Calculator Taxe PFA 2026</h1>
+      <p>Calculează CAS, CASS și impozitul pe venit în câteva secunde. Gratuit, actualizat cu legislația 2026.</p>
+      <div style="display:flex;gap:1rem;margin-top:1.5rem;flex-wrap:wrap">
+        <a href="/calculator/" class="btn" style="background:white;color:#1a56db">🧮 Calculator Complet</a>
+        <a href="/calculator/pfa-vs-srl/" class="btn btn-outline" style="border-color:white;color:white">⚖️ PFA vs SRL</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CALCULATOR EMBED -->
+  <section style="background:#f9fafb;padding:3rem 0">
+    <div class="container">
+      <AdSenseAd format="horizontal" />
+      <div class="card" style="margin-top:1.5rem">
+        <h2 style="margin-top:0">Calculator rapid taxe PFA 2026</h2>
+        <CalculatorPFA client:load />
+      </div>
+    </div>
+  </section>
+
+  <!-- PLAFOANE INFO -->
+  <section style="padding:3rem 0">
+    <div class="container">
+      <h2 class="text-center">Plafoane fiscale PFA 2026</h2>
+      <p class="text-center text-muted" style="margin-bottom:2rem">Bază: salariu minim 4.050 RON</p>
+      <div class="grid-3">
+        <div class="card text-center">
+          <div style="font-size:2rem;margin-bottom:.5rem">📊</div>
+          <strong>6 salarii = 24.300 RON</strong>
+          <p class="text-muted" style="font-size:.875rem;margin-top:.5rem">Sub acest venit net: nu plătești CAS. Plătești CASS fix (2.430 RON/an).</p>
+        </div>
+        <div class="card text-center">
+          <div style="font-size:2rem;margin-bottom:.5rem">📈</div>
+          <strong>12 salarii = 48.600 RON</strong>
+          <p class="text-muted" style="font-size:.875rem;margin-top:.5rem">Plafon opțional CAS dacă venitul e peste 6 salarii.</p>
+        </div>
+        <div class="card text-center">
+          <div style="font-size:2rem;margin-bottom:.5rem">🏆</div>
+          <strong>24 salarii = 97.200 RON</strong>
+          <p class="text-muted" style="font-size:.875rem;margin-top:.5rem">Plafon maxim CAS. Peste acest venit, CAS rămâne fix.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ARTICOLE RECENTE -->
+  {featuredPosts.length > 0 && (
+    <section style="padding:3rem 0;background:#f9fafb">
+      <div class="container">
+        <h2>Ghiduri taxe PFA 2026</h2>
+        <div class="grid-3">
+          {featuredPosts.map(post => (
+            <a href={`/blog/${post.slug}/`} class="card blog-card" style="text-decoration:none">
+              <span class="badge badge-blue">{post.data.group}</span>
+              <h3>{post.data.title}</h3>
+              <p class="text-muted" style="font-size:.875rem">{post.data.description.slice(0,100)}…</p>
+            </a>
+          ))}
+        </div>
+        <div class="text-center" style="margin-top:2rem">
+          <a href="/blog/" class="btn btn-outline">Vezi toate articolele →</a>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- AD bottom -->
+  <div class="container">
+    <AdSenseAd format="inline" />
+  </div>
+</Layout>

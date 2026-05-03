@@ -1,0 +1,163 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ComparatorPFAvsSRL from '../../components/ComparatorPFAvsSRL.tsx';
+import AdSenseAd from '../../components/AdSenseAd.astro';
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  name: 'Calculator PFA vs SRL 2026',
+  url: 'https://calculatortaxepfa.ro/calculator/pfa-vs-srl/',
+  description: 'Compară taxele PFA vs SRL microîntreprindere în 2026. Calculator interactiv cu venit net, CAS, CASS, impozit dividende.',
+  applicationCategory: 'FinanceApplication',
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'RON' },
+  inLanguage: 'ro',
+};
+
+const faq = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'PFA sau SRL — ce e mai avantajos fiscal în 2026?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Depinde de venit. La venituri mici (sub 60.000 RON), PFA e de obicei avantajos. La venituri mari (peste 100.000 RON), SRL microîntreprindere cu 1% poate fi mai eficient din punct de vedere fiscal. Folosiți calculatorul pentru situația dvs. exactă.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Ce impozit plătește un SRL microîntreprindere în 2026?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'SRL microîntreprindere plătește 1% pe cifra de afaceri dacă are cel puțin un angajat, sau 3% dacă nu are angajați. Profitul distribuit ca dividende se impozitează suplimentar cu 8%.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Cât costă înființarea unui SRL față de PFA?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'PFA-ul poate fi înregistrat gratuit la ONRC (sau cu taxe minime de câteva sute de RON). Un SRL necesită capital social minim 1 leu, dar costă în total 200-500 RON taxe notariale și ONRC, plus contabilitate lunară obligatorie (300-800 RON/lună).',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Ce plafon de venit are SRL microîntreprindere în 2026?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Plafonul pentru microîntreprindere în 2026 este echivalentul în RON a 500.000 euro cifră de afaceri anuală. Peste acest plafon, SRL-ul trece la impozit pe profit 16%.',
+      },
+    },
+  ],
+};
+---
+<Layout
+  title="Calculator PFA vs SRL 2026 — Compară Taxele Online"
+  description="Compară taxele PFA vs SRL în 2026. Calculator interactiv: venit net, CAS, CASS, impozit dividende. Află ce formă juridică e mai avantajoasă pentru venitul tău."
+  schema={schema}
+>
+  <script type="application/ld+json" set:html={JSON.stringify(faq)} slot="schema" />
+
+  <div class="container" style="padding-top:2rem;padding-bottom:4rem">
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb">
+      <a href="/">Acasă</a><span>›</span>
+      <a href="/calculator/">Calculator</a><span>›</span>
+      <span>PFA vs SRL 2026</span>
+    </nav>
+
+    <h1>Calculator PFA vs SRL 2026</h1>
+    <p style="font-size:1.1rem;color:#6b7280;margin-bottom:2rem;max-width:640px">
+      Compară taxele reale între PFA și SRL microîntreprindere. Introdu venitul și calculatorul îți arată instant care formă juridică e mai avantajoasă.
+    </p>
+
+    <AdSenseAd format="horizontal" />
+
+    <div class="card" style="margin-top:1.5rem">
+      <ComparatorPFAvsSRL client:load />
+    </div>
+
+    <AdSenseAd format="inline" />
+
+    <!-- Explicatii -->
+    <section style="margin-top:3rem">
+      <h2>PFA vs SRL 2026 — Principalele Diferențe</h2>
+
+      <div class="grid-2" style="margin-top:1.5rem">
+        <div class="card" style="border-top:3px solid #1a56db">
+          <h3 style="color:#1a56db;margin-top:0">PFA — Avantaje</h3>
+          <ul>
+            <li>Înregistrare simplă și ieftină</li>
+            <li>Fără contabilitate dublă obligatorie</li>
+            <li>Cheltuieli deductibile din venit</li>
+            <li>La venituri mici: taxare mai redusă</li>
+            <li>Responsabilitate fiscală directă, clară</li>
+          </ul>
+          <h3 style="color:#dc2626">PFA — Dezavantaje</h3>
+          <ul>
+            <li>Răspundere cu patrimoniul personal</li>
+            <li>CAS și CASS mai mari la venituri ridicate</li>
+            <li>Imagine mai puțin corporativă față de SRL</li>
+          </ul>
+        </div>
+
+        <div class="card" style="border-top:3px solid #059669">
+          <h3 style="color:#059669;margin-top:0">SRL — Avantaje</h3>
+          <ul>
+            <li>Răspundere limitată (capital social)</li>
+            <li>La 1% microîntreprindere: taxare mică pe venit mare</li>
+            <li>Imagine profesională, credibilitate B2B</li>
+            <li>Posibilitate de a lucra cu mai mulți asociați</li>
+            <li>Cheltuieli deductibile mai flexibile</li>
+          </ul>
+          <h3 style="color:#dc2626">SRL — Dezavantaje</h3>
+          <ul>
+            <li>Contabilitate obligatorie (300–800 RON/lună)</li>
+            <li>Costuri administrative mai mari</li>
+            <li>Dividendele se impozitează cu 8%</li>
+            <li>Birocrazie mai complexă</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Reguli fiscale -->
+    <section style="margin-top:3rem">
+      <h2>Reguli fiscale cheie 2026</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Criteriu</th><th>PFA</th><th>SRL Micro 1%</th><th>SRL Micro 3%</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Impozit principal</td><td>10% pe venit net</td><td>1% pe cifra de afaceri</td><td>3% pe cifra de afaceri</td></tr>
+            <tr><td>CAS (pensie)</td><td>25% (plafon 97.200 RON)</td><td>Pe salariu admin</td><td>25% asociat unic (opțional)</td></tr>
+            <tr><td>CASS (sănătate)</td><td>10% (plafon 243.000 RON)</td><td>10% pe dividende</td><td>10% pe dividende</td></tr>
+            <tr><td>Impozit dividende</td><td>Nu se aplică</td><td>8%</td><td>8%</td></tr>
+            <tr><td>Plafon</td><td>300.000 RON (TVA)</td><td>500.000 EUR CA</td><td>500.000 EUR CA</td></tr>
+            <tr><td>Contabilitate</td><td>Simplă / în partidă simplă</td><td>Dublă (obligatorie)</td><td>Dublă (obligatorie)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- FAQ vizual -->
+    <section style="margin-top:3rem">
+      <h2>Întrebări frecvente PFA vs SRL</h2>
+      <div style="display:flex;flex-direction:column;gap:1rem">
+        {faq.mainEntity.map((item: any) => (
+          <div class="card">
+            <strong>{item.name}</strong>
+            <p style="margin:0.5rem 0 0;color:#6b7280;font-size:.9rem">{item.acceptedAnswer.text}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <div style="margin-top:2rem;text-align:center">
+      <a href="/calculator/" class="btn">🧮 Calculator Taxe PFA 2026 →</a>
+    </div>
+  </div>
+</Layout>

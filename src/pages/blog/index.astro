@@ -1,0 +1,51 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('blog');
+const sorted = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const groups = {
+  calculator: sorted.filter(p => p.data.group === 'calculator'),
+  compliance: sorted.filter(p => p.data.group === 'compliance'),
+  ghiduri: sorted.filter(p => p.data.group === 'ghiduri'),
+  tehnic: sorted.filter(p => p.data.group === 'tehnic'),
+};
+
+const groupLabels = {
+  calculator: '🧮 Calculator & Comparatori',
+  compliance: '📋 Taxe & Declarații',
+  ghiduri: '📚 Ghiduri Practice',
+  tehnic: '⚙️ Tehnic & Ügyvitel',
+};
+---
+<Layout
+  title="Blog Taxe PFA 2026 — Ghiduri, Calculatoare și Sfaturi"
+  description="Ghiduri complete pentru taxe PFA și SRL în România 2026: declarația unică, plafoane CAS/CASS, cheltuieli deductibile, e-factură și mai mult."
+>
+  <div class="container" style="padding-top:2rem;padding-bottom:4rem">
+    <nav class="breadcrumb"><a href="/">Acasă</a><span>›</span><span>Blog</span></nav>
+    <h1>Ghiduri Taxe PFA 2026</h1>
+    <p class="text-muted" style="margin-bottom:2rem">Toate articolele actualizate cu legislația fiscală 2026.</p>
+
+    {Object.entries(groups).map(([key, posts]) =>
+      posts.length > 0 && (
+        <section style="margin-bottom:3rem">
+          <h2 style="border-bottom:2px solid var(--border);padding-bottom:.5rem">{groupLabels[key as keyof typeof groupLabels]}</h2>
+          <div class="grid-3" style="margin-top:1rem">
+            {posts.map(post => (
+              <a href={`/blog/${post.slug}/`} class="card blog-card" style="text-decoration:none">
+                <span class="badge badge-blue" style="font-size:.7rem">{post.data.group}</span>
+                <h3 style="font-size:1rem">{post.data.title}</h3>
+                <p style="font-size:.85rem;color:#6b7280;margin:0">{post.data.description.slice(0,90)}…</p>
+                <p style="font-size:.75rem;color:#9ca3af;margin-top:.5rem">
+                  {post.data.pubDate.toLocaleDateString('ro-RO', {year:'numeric',month:'short',day:'numeric'})}
+                </p>
+              </a>
+            ))}
+          </div>
+        </section>
+      )
+    )}
+  </div>
+</Layout>
