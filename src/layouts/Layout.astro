@@ -21,8 +21,8 @@ const {
   schema,
 } = Astro.props;
 
-const siteUrl = 'https://calculatortaxepfa.ro';
-const fullTitle = title.includes('2026') ? title : `${title} | CalculatorTaxePFA.ro`;
+const siteUrl = 'https://calculatortaxepfa.eu';
+const fullTitle = title.includes('2026') ? title : `${title} | CalculatorTaxePFA.eu`;
 ---
 <!DOCTYPE html>
 <html lang="ro">
@@ -46,6 +46,9 @@ const fullTitle = title.includes('2026') ? title : `${title} | CalculatorTaxePFA
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content={fullTitle} />
   <meta name="twitter:description" content={description} />
+
+  <!-- Google Search Console -->
+  <meta name="google-site-verification" content="vnJbvOM5qVjiHt8xtemVrGdQZBXz5PYVTpfTSkTllWg" />
 
   <!-- Schema.org -->
   {schema && (
