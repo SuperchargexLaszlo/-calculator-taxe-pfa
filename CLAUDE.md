@@ -14,7 +14,7 @@ SALARIU_MINIM = 4050 RON
 PLAFON_6_SAL  = 24300 RON   (6 × 4050) — sub acest nivel: fără CAS
 PLAFON_12_SAL = 48600 RON   (12 × 4050) — plafon CAS sistem real
 PLAFON_24_SAL = 97200 RON   (24 × 4050) — plafon CASS
-PLAFON_60_SAL = 243000 RON  (60 × 4050) — plafon CASS maxim
+PLAFON_72_SAL = 291600 RON  (72 × 4050) — plafon CASS maxim
 
 CAS_RATA      = 25%          (pensie)
 CASS_RATA     = 10%          (sănătate)

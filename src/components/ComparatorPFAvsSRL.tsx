@@ -4,7 +4,7 @@ import { useState, useMemo } from 'react';
 const SALARIU_MINIM = 4050;
 const PLAFON_6 = SALARIU_MINIM * 6;   // 24300
 const PLAFON_24 = SALARIU_MINIM * 24; // 97200
-const PLAFON_60 = SALARIU_MINIM * 60; // 243000
+const PLAFON_72 = SALARIU_MINIM * 72; // 291600 (plafon maxim CASS 2026)
 const CAS_RATA = 0.25;
 const CASS_RATA = 0.10;
 const IMPOZIT_RATA = 0.10;
@@ -30,7 +30,7 @@ function calcPFA(venit: number, pensionar: boolean, cheltuieli: number = 0) {
   if (venitNet < PLAFON_6) {
     cass = PLAFON_6 * CASS_RATA;
   } else {
-    cass = Math.min(venitNet, PLAFON_60) * CASS_RATA;
+    cass = Math.min(venitNet, PLAFON_72) * CASS_RATA;
   }
   const bazaImpozit = Math.max(0, venitNet - cas - cass);
   const impozit = bazaImpozit * IMPOZIT_RATA;
@@ -59,10 +59,10 @@ function calcSRL1(venit: number) {
   // Profit disponibil dividende = venit - microTax - costAngajator
   const profitBrut = Math.max(0, venit - microTax - costAngajator);
 
-  // CASS pe dividende: dacă dividendele > 6 salarii, se plătește CASS 10% plafonat la 60 salarii
+  // CASS pe dividende: dacă dividendele > 6 salarii, se plătește CASS 10% plafonat la 72 salarii
   let cassDividende = 0;
   if (profitBrut >= PLAFON_6) {
-    cassDividende = Math.min(profitBrut, PLAFON_60) * CASS_RATA;
+    cassDividende = Math.min(profitBrut, PLAFON_72) * CASS_RATA;
   } else if (profitBrut > 0) {
     cassDividende = PLAFON_6 * CASS_RATA;
   }
@@ -86,7 +86,7 @@ function calcSRL3(venit: number) {
   // CASS pe dividende
   let cassDividende = 0;
   if (profitBrut >= PLAFON_6) {
-    cassDividende = Math.min(profitBrut, PLAFON_60) * CASS_RATA;
+    cassDividende = Math.min(profitBrut, PLAFON_72) * CASS_RATA;
   } else if (profitBrut > 0) {
     cassDividende = PLAFON_6 * CASS_RATA;
   }

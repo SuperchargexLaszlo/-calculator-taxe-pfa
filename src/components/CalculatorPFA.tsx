@@ -5,7 +5,7 @@ const SALARIU_MINIM = 4050;
 const PLAFON_6 = SALARIU_MINIM * 6;   // 24300
 const PLAFON_12 = SALARIU_MINIM * 12; // 48600
 const PLAFON_24 = SALARIU_MINIM * 24; // 97200
-const PLAFON_60 = SALARIU_MINIM * 60; // 243000
+const PLAFON_72 = SALARIU_MINIM * 72; // 291600 (plafon maxim CASS 2026)
 const CAS_RATA = 0.25;
 const CASS_RATA = 0.10;
 const IMPOZIT_RATA = 0.10;
@@ -50,7 +50,7 @@ function calculeaza(
       // Sub 6 salarii: CASS fix pe 6 salarii
       cass = PLAFON_6 * CASS_RATA;
     } else {
-      const bazaCASS = Math.min(venitNet, PLAFON_60);
+      const bazaCASS = Math.min(venitNet, PLAFON_72);
       cass = bazaCASS * CASS_RATA;
     }
     // IT scutire CASS: nu se aplică la PFA (doar salariați IT)

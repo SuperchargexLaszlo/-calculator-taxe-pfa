@@ -5,11 +5,20 @@ interface Props {
 }
 const { format = 'horizontal' } = Astro.props;
 const cls = format === 'horizontal' ? 'ad-unit ad-unit-horizontal' : 'ad-unit ad-unit-inline';
-const label = format === 'horizontal' ? 'Publicitate 728×90' : 'Publicitate 300×250';
+
+// AdSense: adaugă PUBLISHER_ID (ca-pub-XXXX) și slot-ul real după aprobare.
+// Până atunci componenta NU randează text placeholder (ar fi indexat ca și conținut).
+const PUBLISHER_ID = ''; // ex: 'ca-pub-1234567890123456'
+const AD_SLOT = '';      // ex: '1234567890'
 ---
-<!-- AdSense unit — înlocuiește cu codul real după aprobare -->
-<div class={cls}>{label}</div>
-<!-- PRODUCTION: dezcommentează și adaugă data-ad-client + data-ad-slot:
-<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXX" data-ad-slot="XXXX" data-ad-format="auto" data-full-width-responsive="true"></ins>
-<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
--->
+{PUBLISHER_ID && AD_SLOT && (
+  <div class={cls}>
+    <ins class="adsbygoogle"
+      style="display:block"
+      data-ad-client={PUBLISHER_ID}
+      data-ad-slot={AD_SLOT}
+      data-ad-format="auto"
+      data-full-width-responsive="true"></ins>
+    <script is:inline>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+)}
